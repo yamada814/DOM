@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>querySelectorサンプル</title>
+</head>
+
+<body>
+    <h1>querySelectorサンプル</h1>
+    <article>
+        <section>
+            <h2 class="star">第１章</h2>
+            <p class="heart">この章の文章です</p>
+        </section>
+        <section>
+            <h2 class="star">第２章</h2>
+            <p>この章の文章です</p>
+        </section>
+        <section>
+            <h2 class="heart">第３章</h2>
+            <p class="heart">この章の文章です</p>
+        </section>
+    </article>
+    <footer>
+        <p class="heart">記事外の文章</p>
+    </footer>
+    <script>
+        const starElement = document.querySelector("article .star");
+        starElement.textContent = `★${starElement.textContent}`;
+
+        const heartList = document.querySelectorAll("article .heart");
+        for(const element of heartList){
+            element.textContent = `♡${element.textContent}`
+        }
+        
+
+    </script>
+</body>
+
+</html>

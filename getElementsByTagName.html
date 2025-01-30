@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>getElementsByTagNameサンプル</title>
+</head>
+
+<body>
+    <h1>getElementByTagNameサンプル</h1>
+    <div>
+        <section>
+            <h2>最初の章の見出し</h2>
+            <p>最初の章の文章。</p>
+        </section>
+        <section>
+            <h2>ふたつめの章の見出し</h2>
+            <p>ふたつめの章の文章。</p>
+        </section>
+    </div>
+    <script>
+        const collection = document.getElementsByTagName("h2");
+        for(const element of collection){
+            element.textContent = `<${element.textContent}>`
+        }
+
+    </script>
+</body>
+
+</html>

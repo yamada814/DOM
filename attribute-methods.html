@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>メソッドによる属性値の取得・更新・設定・削除</title>
+    <style>
+        .color-red{
+            color:red;
+        }
+        .color-blue{
+            color:blue;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>メソッドによる属性値の取得・更新・設定・削除のサンプル</h1>
+    <p id="target" class="color-red">5秒後にこのp要素のclass属性の値が更新されます。
+        <br />同じく5秒後にstyle属性が設定されます。
+        <br />また、10秒後にclass属性は削除されます。
+    </p>
+    <script>
+        const target = document.getElementById("target");
+        const attributeNames = target.getAttributeNames();
+        for (const name of attributeNames){
+            console.log(`${name}:${target.getAttribute(name)}`);
+        }
+        setTimeout(() => {
+            // ▼ class属性の値を更新する
+            target.setAttribute("class", "color-blue");
+            console.log(target.className);
+            // ▼ style属性を設定する
+            target.setAttribute("style", "font-weight:bold");
+        }, 5_000);
+        setTimeout(() => {
+            // ▼ class属性を削除する
+            target.removeAttribute("class");
+            console.log(target.className);
+        }, 10_000);
+    </script>
+</body>
+
+</html>

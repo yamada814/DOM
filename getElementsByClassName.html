@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>getElementsByClassNameサンプル</title>
+</head>
+
+<body>
+    <h1>getElementsByClassNameサンプル</h1>
+    <section>
+        <h2 class="star">最初の章の見出し</h2>
+        <p>この章の文章です。</p>
+    </section>
+    <section>
+        <h2>ふたつめの章の見出し</h2>
+        <p class="star">この章の文章です。</p>
+    </section>
+    <script>
+        const collection = document.getElementsByClassName("star");
+        for(const element of collection){
+            element.textContent = `★${element.textContent}`
+        }
+  
+    </script>
+</body>
+
+</html>

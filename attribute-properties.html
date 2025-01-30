@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>属性値の取得・更新・設定</title>
+    <style>
+        .font-bold{
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>属性値の取得・更新・設定のサンプル</h1>
+    <hr />
+    <div>
+        <p>5秒後に以下の画像が切り替わります。</p>
+        <img id="image" src="https://www.sh-k.com/wp3/wp-content/uploads/2017/11/mv1.png">
+    </div>
+    <hr />
+    <div>
+        <p>5秒後に以下のチェックボックスが自動的にチェックされます。</p>
+        <input id="checkbox" type="checkbox" >
+    </div>
+    <hr />
+    <div>
+        <p id="paragraph">5秒後にこの文章が太字になります。</p>
+    </div>
+    <script>
+        const image = document.getElementById("image");
+        const checkbox = document.getElementById("checkbox");
+        const paragraph = document.getElementById("paragraph");
+        setTimeout(()=>{
+            image.src = "https://www.sh-k.com/wp3/wp-content/uploads/2017/11/mv3.png";
+            checkbox.checked = "checked";
+        },5000);
+        setTimeout(()=>{
+            paragraph.className = "font-bold";
+        },10_000);;
+      
+    </script>
+</body>
+
+</html>

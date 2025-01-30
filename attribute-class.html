@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>class属性の値の更新</title>
+    <style>
+        .color-red {
+            color: red;
+        }
+        .font-bold {
+            font-weight: bold;
+        }
+        .font-24 {
+            font-size: 24px;
+        }
+    </style>
+</head>
+
+<body>
+    <p id="target" class="color-red font-bold">この文章の class 属性の値を更新します。</p>
+    <script>
+        const elm = document.getElementById("target");
+        elm.classList.add("font-24");
+        //要素のclassListプロパティのaddメソッドで、クラスを追加
+        elm.classList.toggle("font-bold");
+        //font-boldクラスが存在すれば削除してfalseを返し、存在しなければ追加しtrueを返す
+
+        // // ▼ class属性に新しいクラス名（font-24）を追加
+        // elm.className = elm.className + " font-24";
+
+        // // ▼ class属性から特定のクラス名（font-bold）だけを削除
+        // const className = elm.getAttribute("class");
+        // if (className?.includes("font-bold")) {
+        //     const newClassName = className.split("font-bold").join("");
+        //     elm.setAttribute("class", newClassName);
+        // }
+
+    </script>
+</body>
+
+</html>

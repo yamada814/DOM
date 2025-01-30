@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="ja">
+<head>
+	<meta charset="utf-8">
+	<meta content="width=device-width,initial-scale=1" name="viewport">
+	<title>JavaScriptのコードを実行する方法</title>
+	<script>
+		console.log("headタグの内側");
+		function func(){
+			console.log("後からから呼び出される処理");
+		}
+	</script>
+</head>
+<body>
+	<main>
+		<h1>JavaScriptのコードを実行する方法</h1>
+	</main>
+	<script>
+		func();  // 他の要素の解析が完了した後で上で定義した関数を呼び出す
+	</script>
+</body>
+</html>

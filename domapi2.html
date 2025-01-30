@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <title>HTML文書内の要素を追加する</title>
+</head>
+<body>
+    <h1>5秒後に文章を追加する</h1>
+    <script>
+        setTimeout(()=>{
+            // ▼ p タグの要素オブジェクトを作成
+            const element = document.createElement("p");
+            element.textContent = "追加された文章"  // 要素内のテキストを設定
+            document.body.append(element)  // <body> タグ内の最後に作成した要素を追加
+        }, 5_000);
+    </script>
+</body>
+</html>

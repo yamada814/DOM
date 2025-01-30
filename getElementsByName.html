@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>getElementsByNameサンプル</title>
+</head>
+
+<body>
+    <h1>getElementsByNameサンプル</h1>
+    <div>
+        <label><input type="checkbox" name="myCheckbox">A</label>
+        <label><input type="checkbox" name="myCheckbox">B</label>
+        <label><input type="checkbox" name="myCheckbox">C</label>
+    </div>
+    <script>
+        const nodelist = document.getElementsByName("myCheckbox");
+        for(const node of nodelist){
+            node.checked = "checked";
+        }
+
+    </script>
+</body>
+
+</html>

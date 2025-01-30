@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <title>要素を書き換える</title>
+</head>
+<body>
+    <h1>5秒後に要素が書き変わる</h1>
+    <p id="message">元の内側のテキスト</p>
+    <script>
+        const element = document.getElementById("message");
+        setTimeout(() => {
+            element.textContent = "後から書き換わった文章";            
+        }, 2000);
+
+    </script>
+</body>
+</html>

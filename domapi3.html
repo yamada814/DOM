@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <title>既存の要素の属性値を変更する</title>
+    <style>
+        .red{
+            color: red;
+        }
+        .green{
+            color: green;
+        }
+    </style>
+
+</head>
+<body>
+    <h1>5秒後にclass属性の値が変わる</h1>
+    <p  id="message" class="red">この文章が緑色に変わります</p>
+    <script>
+        const element = document.getElementById("message");
+        setTimeout(() => {
+            element.className = "green";       
+        }, 5000);
+    </script>
+</body>
+</html>

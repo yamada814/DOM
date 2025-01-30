@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <title>イベント処理を記述する</title>
+</head>
+<body>
+    <h1>キーを押下すると警告ダイアログボックスが表示</h1>
+    <script>
+        // 第一引数にイベント名を、第二引数に登録する処理（関数オブジェクト）を指定
+        document.body.addEventListener("keypress",()=>{alert("キーが押下されました")})
+    </script>
+</body>
+</html>
