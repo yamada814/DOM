@@ -1,4 +1,4 @@
-const datas = [
+const data = [
     ["区分", "料金"],  // ◀ 最初の要素は表の各列のタイトル
     ["シルバー", "1,500円"],
     ["高校生以上", "1,800円"],
@@ -6,28 +6,34 @@ const datas = [
     ["小学生", "1,000円"],
     ["幼児以下", "無料"]
 ];
-const table = document.createElement("table");
+// const table = document.createElement("table");
 // for (const d of data) {
-//     for (const el of d) {
-//             if (data.indexOf(d) === 0) {
-//                 const th = document.createElement("th");
-//                 th.textContent = el;
-//                 table.append(th);
-//             } else {
-//                 const td = document.createElement("td");
-//                 td.textContent(el);
-//                 table.append(td);
-//             }
+//     const tr = document.createElement("tr");
+//     for (const e of d) {
+//         if (data.indexOf(d) === 0) {
+//             const th = document.createElement("th");
+//             th.textContent = e;
+//             tr.appendChild(th);
+//         } else {
+//             const td = document.createElement("td");
+//             td.textContent = e;
+//             tr.appendChild(td)
 //         }
+//     }
+//     table.appendChild(tr);
 // }
-for (const data of datas) {
-    for (const col of datas) {
-        if (datas.indexOf(col) === 0) {
-            const th = document.createElement("th");
-            th.textContent = col;
-            table
-        }
+// document.getElementById("container").append(table)
+
+const table = document.createElement("table");
+for (const row of data) {
+    const tr = document.createElement("tr");
+    for (const col of row) {
+        const rowdata = data.indexOf(row) === 0 ? "th" : "td";
+        const rowelm = document.createElement(rowdata);
+        rowelm.textContent = col;
+        tr.append(rowelm);
     }
+    table.append(tr);
 }
-document.createElement("container").append(table)
+document.getElementById("container").append(table)
 

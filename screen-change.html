@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>画面の変化に関するイベント</title>
+</head>
+
+<body>
+    <h1>画面の変化に関するイベントのサンプル</h1>
+    <section>
+        <h2>現在の画面サイズ</h2>
+        <p id="windowSize"></p>
+    </section>
+    <section>
+        <h2>現在の画面の向き</h2>
+        <p id="orientation"></p>
+    </section>
+    <section>
+        <h2>フルスクリーンモード</h2>
+        <div id="fullscreen-div" style="background-color: white;">
+            <p>ここがフルスクリーンで表示されます。</p>
+            <button id="toggle-fullscreen">フルスクリーンを開始</button>
+        </div>
+    </section>
+    <script>
+        // ▼ スマートフォンなどで画面の向きが変わったときに起きるイベント
+        const orientation = document.getElementById("orientation") 
+        orientation.textContent = screen.orientation.angle;
+        screen.orientation.addEventListener("change",()=>{
+            orientation.textContent = screen.orientation.angle;
+        })
+
+        // ▼ windowサイズが変更されたときに起きるイベント
+        const windowSize = document.getElementById("windowSize");
+        windowSize.textContent = `Width:${innerWidth} Height:${innerHeight}`
+        window.addEventListener("resize",()=>{
+            windowSize.textContent = `Width:${innerWidth} Height:${innerHeight}`
+        })
+
+        // ▼ 要素をフルスクリーンモードで表示したときに起きるイベント
+        const divElm = document.getElementById("fullscreen-div");
+        const btnElm = document.getElementById("toggle-fullscreen");
+
+        btnElm.addEventListener("click",()=>{
+            if(document.fullscreenElement){
+                document.exitFullscreen();
+            }else{
+                divElm.requestFullscreen();
+            }
+        });
+
+        divElm.addEventListener("fullScreenChange",()=>{
+            btnElm.textContent = document.fullscreenElement ? "フルスクリーンを終了": "フルスクリーンを開始" ;
+        });
+
+
+    </script>
+</body>
+
+</html>
