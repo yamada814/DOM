@@ -4,13 +4,33 @@
     <meta charset="utf-8">
     <meta content="width=device-width,initial-scale=1" name="viewport">
     <title>HTML文書内の要素を取得する</title>
+    <style>
+        .font-bold{
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-    <h1 id="title">湘南ハイテク企画</h1>
+    <h1 id="title" style="color: red;">湘南ハイテク企画</h1>
     <script>
-        // ▼ id 属性の値が "title" の要素を取得
-        const element = document.getElementById("title");
-        console.log(element.textContent);// 湘南ハイテク企画
+        const title = document.getElementById("title");
+        console.log(title.textContent);
+        title.textContent = "SHK";
+
+        const p = document.createElement("p");//要素ノードを作成
+        p.textContent = "プログラムで追加した文章";//テキストノードを追加
+        document.body.append(p);//bodyの下に子ノードとしてpを追加
+
+        title.style = "color:green";//titleのstyle属性の値を変更
+        p.className = "font-bold";
+
+        document.body.addEventListener(
+            "keypress"/*イベント名*/,
+            function(event){/*コールバック関数(イベントハンドラ)*/
+                alert(`${event.key}キーが押下されました`)//eventオブジェクトのkeyプロパティ
+        });
+
+
     </script>
 </body>
 </html>

@@ -22,15 +22,15 @@
     <p id="target" class="color-red font-bold">この文章の class 属性の値を更新します。</p>
     <script>
         const elm = document.getElementById("target");
-        elm.className = elm.className + " font-24";
+        //ElementオブジェクトのclassListプロパティに"font-24"を追加する
+        elm.classList.add("font-24");
+        
+        // ElementオブジェクトのclassListプロパティに
+        // font-boldが存在しない場合はfont-boldを追加して、戻り値としてtrueを返す
+        // font-boldが存在する場合はfont-boldを削除して、戻り値としてfalseを返す
+        elm.classList.toggle("font-bold");
 
-        const className = elm.getAttribute("class");
-        if(className?.includes("font-bold")){
-            const newClassName = className.split("font-bold").join("")
-            // font-boldで分割した2つの文字列を、""(空文字)でつなげる
-            // "color-red font-bold font-24"からの["color-red "," font-24"]からの"color-red font-24"
-            elm.setAttribute("class",newClassName);
-        }
+
     </script>
 </body>
 

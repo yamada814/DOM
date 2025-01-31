@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>xss</title>
+    <script src="xss.js" defer="defer"></script>
+    <style>
+        #personalArea, #attackHTML{
+            box-sizing: border-box;
+            border: 1px solid black;
+            padding: 0 1rem;
+            margin-bottom: 1rem;
+        }
+        .board {
+            box-sizing: border-box;
+            background-color: lightgray;
+            padding: 0.5rem 1rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>クロスサイト・スクリプティング（XSS）のサンプル</h1>
+    <div id="personalArea">
+        <!-- ▼ ページ内に表示されている個人情報 -->
+        <p class="name">名前: 田中太郎</p>
+        <p class="email">メールアドレス: xxxx@xxxx.xx.xx</p>
+    </div>
+    <div id="attackHTML">
+        <p>
+            以下の文字列を入力したときの違いを確認してください。
+        </p>
+        <p>
+            &lt;a href="javascript:alert('あなたの個人情報を盗みました。' + document.querySelector('#personalArea .name').textContent + ',' + document.querySelector('#personalArea .email').textContent);"&gt;クリックしたら危ないやつ&lt;/a&gt;
+        </p>
+    </div>
+    <p>
+    <p>
+    <!--
+        次のコードをフォームに入力されると危ない
+        <a href="javascript:alert('あなたの個人情報を盗みました。' + document.querySelector('#personalArea .name').textContent + ',' + document.querySelector('#personalArea .email').textContent);">クリックしたら危ないやつ</a>
+    -->
+    <div id="useInnerHTML" class="board">
+        <h2>innerHTMLを使用した危険な掲示板</h2>
+        <div class="inputArea">
+            <input type="text" size="50">
+            <input type="button" value="追加">
+        </div>
+        <div class="outputArea">
+            <ul></ul>
+        </div>
+    </div>
+    <div id="useTextContent" class="board">
+        <h2>textContentを使用した安全な掲示板</h2>
+        <div class="inputArea">
+            <input type="text" size="50">
+            <input type="button" value="追加">
+        </div>
+        <div class="outputArea">
+            <ul></ul>
+        </div>
+    </div>
+    <script>
+        // ▼ innerHTMLを使用した掲示板のコード
+        {
+            const inputText = document.querySelector("#useInnerHTML .inputArea input[type='text']");
+            const inputBtn = document.querySelector("#useInnerHTML .inputArea input[type='button']");
+            const uList = document.querySelector("#useInnerHTML .outputArea ul");
+            inputBtn.addEventListener("click", () => {
+                const li = document.createElement("li");
+                // innerHTML プロパティを使用した危険な挿入
+                li.innerHTML = inputText.value;
+                uList.appendChild(li);
+            });
+        }
+        // ▼ textContentを使用した掲示板のコード
+        {
+            const inputText = document.querySelector("#useTextContent .inputArea input[type='text']");
+            const inputBtn = document.querySelector("#useTextContent .inputArea input[type='button']");
+            const uList = document.querySelector("#useTextContent .outputArea ul");
+            inputBtn.addEventListener("click", () => {
+                const li = document.createElement("li");
+                // textContentプロパティを使用した安全な挿入
+                li.textContent = inputText.value;
+                uList.appendChild(li);
+            });
+        }
+    </script>
+</body>
+
+</html>

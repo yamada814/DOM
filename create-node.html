@@ -24,42 +24,52 @@
 
         // --- ▼ ノードの作成 --- //
         // 要素ノードの作成
-        const paragraph1 = document.createElement("p");
-        paragraph1.textContent = "これはp要素１です。";
-        const paragraph2 = document.createElement("p");
-        paragraph2.textContent = "これはp要素２です。";
+        const p1 = document.createElement("p");
+        const p2 = document.createElement("p");
+
+        p1.textContent = "これはp要素1です";
+        p2.textContent = "これはp要素2です";
+
         // テキストノードの作成
-        const textNode1 = document.createTextNode("これはテキストノード１です。");
-        const textNode2 = document.createTextNode("これはテキストノード２です。");
-        const textNode3 = document.createTextNode("これはテキストノード３です。");
+        const tx1 = document.createTextNode("これはテキストノード1です");
+        const tx2 = document.createTextNode("これはテキストノード2です");
+        const tx3 = document.createTextNode("これはテキストノード3です");
+
         // コメントノードの作成
-        const commentNode = document.createComment("これはコメントノードです。");
+        const cm = document.createComment("これはコメントノードです");
 
         // --- ▼ ノードの挿入 --- //
         // 子ノードとして挿入（ Node.appendChild()版 ）
-        container1.appendChild(paragraph2);
+        container1.appendChild(p2);
+
         // 子ノードとして挿入（ Element.appendChild()版 ）
-        container2.append(textNode2, commentNode, "文字列もそのまま追加できます。");
+        container2.appendChild(tx2,cm,"文字列もそのまま追加できます");
+  
         // 兄弟ノードとして親要素の子ノードリストへ挿入
-        textNode2.before(textNode1);
-        textNode2.after(textNode3);
+        tx2.before(tx1);//tx2の前にtx1を追加する
+        tx2.after(tx3);//tx2の後にtx3を追加する
+ 
         // 位置を指定してノードを追加
-        container1.insertBefore(paragraph1, paragraph2);  // ◀ p要素２の前に挿入
+        container1.insertBefore(p1,p2);
+ // ◀ p要素２の前に挿入
 
         // --- ▼ ノードの削除（実行する場合はコメント化を解除してください） --- //
         // 要素ノードを削除
-        // paragraph1.remove();
-        // 子ノードを指定して削除
-        // container2.removeChild(textNode1);
+        p1.remove();//p1自身を削除
 
+        // 子ノードを指定して削除
+        container2.removeChild(tx1);//container2の子要素であるtx1を指定して削除
+   
         // 子ノードをすべて削除（ Element.remove()版 ）
-        // while(container1.firstChild){
-        //     container1.firstChild.remove();
-        // }
+        while(container1.firstChild){
+            container1.firstChild.remove();
+        }
+
         // 子ノードをすべて削除（ Node.removeChild()版 ）
-        // while(container2.firstChild){
-        //     container2.removeChild(container2.firstChild);
-        // }
+        while(container2.firstChild){
+            container2.removeChild(container2.firstChild);
+        }
+
     </script>
 </body>
 

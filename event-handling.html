@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>イベント処理の３つの構文</title>
+</head>
+
+<body>
+    <h1>イベント処理の３つの構文</h1>
+    <div>
+        <h3>▼ clickイベント</h3>
+        <button id="myBtn1">addEventListener</button>
+        <button id="myBtn2">onclick</button>
+        <button id="myBtn3" onclick="clickFunc(event)">onclick="clickFunc()"</button>
+    </div>
+    <script>
+        function clickFunc(event){
+            console.log(event.target.id);
+            alert(event.target.textContent);
+        }
+        const myBtn1 = document.getElementById("myBtn1");
+        const myBtn2 = document.getElementById("myBtn2");
+
+        myBtn1.addEventListener("click",clickFunc);
+        myBtn1.addEventListener("click",()=>{
+            alert("addEventListenerで二つ目に登録した処理");
+        });
+        //myBtn1をクリックすると2つのaddEvenrListenerが実行される
+
+        myBtn2.onclick = clickFunc;
+        myBtn2.onclick = (event) => {
+            console.log(event.target.id);
+            alert("上書きした処理")      
+        }
+        //onclickプロパティに登録される処理は１つだけなので上書きされる
+
+
+    </script>
+</body>
+
+</html>

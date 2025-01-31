@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>innerText</title>
+</head>
+
+<body>
+    <h1>innerTextのサンプル</h1>
+    <div id="container">
+        自身のテキスト
+        <div>
+            子要素のテキスト
+            <div>
+                孫要素１のテキスト
+            </div>
+            <div>
+                孫要素２のテキスト
+            </div>
+        </div>
+    </div>
+    <script>
+        const container = document.getElementById("container");
+        console.log(container.innerText);
+        container.innerText = "置き換わったテキストノード\n改行文字は<br>に置き換えてくれる"
+
+    </script>
+</body>
+
+</html>

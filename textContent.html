@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>textContent</title>
+</head>
+
+<body>
+    <h1>textContentのサンプル</h1>
+    <div id="container">
+        自身のテキスト
+        <div>
+            子要素のテキスト
+            <div>
+                孫要素１のテキスト
+            </div>
+            <div>
+                孫要素２のテキスト
+            </div>
+        </div>
+        <p style="visibility: hidden;">非表示のテキスト</p>
+        <style>
+            div#container{
+                color:black;
+            }
+        </style>
+    </div>
+    <script>
+        const container = document.getElementById("container");
+        // innerText と textContent の比較
+        console.log("---- ▼ innerText で取得した文字列");
+        console.log(container.innerText);
+        console.log("---- ▼ textContent で取得した文字列");
+        console.log(container.textContent);
+        // 文字列を代入すると内側のノードがすべて置き換えられる
+        container.textContent = "<p>新しいテキスト\n改行文字は<br />に変換されない</p>";
+    </script>
+</body>
+
+</html>

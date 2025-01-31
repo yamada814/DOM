@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ドキュメントやリソースの読み込みに関するイベント</title>
+  <script>
+    // ▼ これより下にあるドキュメントが読み込まれる前に実行される
+    {
+      console.log("beforeEndOfHead");
+      const pElm = document.getElementById("beforeEndOfHead");
+      if (pElm) {
+        pElm.textContent += "JavaScriptで文章を追加しました。";
+      }
+    }
+    // ▼ 画像やスタイルシートなどのリソースすべてが読み込まれた後に実行される
+    window.addEventListener("load", () => {                             
+      console.log("load");
+      const pElm = document.getElementById("load");
+      if (pElm) {
+        pElm.textContent += "JavaScriptで文章を追加しました。";
+      }
+    });
+    // ▼ ドキュメント本体の読み込み完了後に実行される
+    document.addEventListener("DOMContentLoaded", () => {
+      console.log("DOMContentLoaded");
+      const pElm = document.getElementById("DOMContentLoaded");
+      if (pElm) {
+        pElm.textContent += "JavaScriptで文章を追加しました。";
+      }
+    });
+  </script>
+  <!-- ▼ defer属性を付けて読み込んだスクリプトファイル
+         ドキュメント読み込み完了後、deferを先に実行 その後DOMContentLoaded-->
+  <script src="./load-event.js" defer></script>                       
+</head>
+
+<body>
+  <h1>ドキュメントやリソースの<br />読み込みに関するイベントのサンプル</h1>
+  <div>
+    <p id="beforeEndOfHead">Before end of head:</p>
+    <p id="load">load:</p>
+    <p id="DOMContentLoaded">DOMContentLoaded:</p>
+    <p id="defer">defer:</p>
+    <p id="beforeEndOfBody">Before end of body:</p>
+  </div>
+  <div>
+    <blockquote><img id="img-apple" width="100px"
+        src="https://2.bp.blogspot.com/-oTqVMb3zbQ4/UgSMNNLY2wI/AAAAAAAAW-o/4nxDWnz7YsQ/s800/fruit_apple.png"
+        alt="りんごのイラスト">
+      <p><small>引用：いらすとや</small></p>
+    </blockquote>
+
+  </div>
+  <script>
+    // ▼ これより上にあるドキュメントが読み込まれた後に実行される
+    {
+      console.log("beforeEndOfBody");
+      const pElm = document.getElementById("beforeEndOfBody");
+      if (pElm) {
+        pElm.textContent += "JavaScriptで文章を追加しました。";
+      }
+
+      document.getElementById("img-apple")?.addEventListener('load', () => {
+        console.log("画像の読み込みを完了しました。");
+      })
+    }
+  </script>
+</body>
+
+</html>

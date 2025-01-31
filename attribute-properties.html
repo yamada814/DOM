@@ -29,17 +29,19 @@
         <p id="paragraph">5秒後にこの文章が太字になります。</p>
     </div>
     <script>
-        const image = document.getElementById("image");
+        const img = document.getElementById("image");
         const checkbox = document.getElementById("checkbox");
         const paragraph = document.getElementById("paragraph");
-        setTimeout(()=>{
-            image.src = "https://www.sh-k.com/wp3/wp-content/uploads/2017/11/mv3.png";
+
+        setTimeout(() => {
+            img.src = "https://www.sh-k.com/wp3/wp-content/uploads/2017/11/mv3.png";
             checkbox.checked = "checked";
-        },5000);
-        setTimeout(()=>{
+        }, 5000);
+
+        setTimeout(() => {
             paragraph.className = "font-bold";
-        },10_000);;
-      
+        }, 10_000);
+
     </script>
 </body>
 

@@ -4,15 +4,22 @@
 	<meta charset="utf-8">
 	<meta content="width=device-width,initial-scale=1" name="viewport">
 	<title>JavaScriptのコードを実行する方法</title>
-	<script src="./script1.js"></script>
-
+    <script>
+        console.log("headタグ内");
+    </script>
 </head>
 <body>
+	<script>
+		console.log("1. bodyタグの開始直後");
+	</script>
 	<main>
 		<h1>JavaScriptのコードを実行する方法</h1>
+		<script>
+			console.log("2. 他のタグの内側");
+		</script>
 	</main>
-	<script src="./script2.js"></script>
-
-
+	<script>
+		console.log("3. bodyタグの終了直前");
+	</script>
 </body>
 </html>

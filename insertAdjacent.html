@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>insertAdjacent</title>
+  <style>
+    .container {
+      outline: 1px solid black;
+    }
+  </style>
+
+</head>
+
+<body>
+  <h1>insertAdjacent~ メソッドのサンプル</h1>
+  <section>
+    <h2>insertAdjacentHTML()</h2>
+    <div id="insertAdjacentHTML" class="container">
+      <p>最初の文章</p>
+      <p>真ん中の文章</p>
+      <p>最後の文章</p>
+    </div>
+  </section>
+  <section>
+    <h2>insertAdjacentElement()</h2>
+    <div id="insertAdjacentElement" class="container">
+      <p>最初の文章</p>
+      <p>真ん中の文章</p>
+      <p>最後の文章</p>
+    </div>
+  </section>
+  <script>
+    // ▼ insertAdjacentHTML()の例
+    const container1 = document.getElementById("insertAdjacentHTML");
+    container1.insertAdjacentHTML("beforebegin","<p>beforebegin</p>");
+    container1.insertAdjacentHTML("afterbegin","<p>afterbegin<\p>");
+    container1.insertAdjacentHTML("beforeend","<p>beforeend</p>");
+    container1.insertAdjacentHTML("afterend","<p>afterend</p>")
+
+
+    // ▼ insertAdjacentElement()の例
+    const container2 = document.getElementById("insertAdjacentElement");
+    function createParaElement(content){
+        const newelm = document.createElement("p");
+        newelm.textContent = content;
+        return newelm
+    }
+
+    container2.insertAdjacentElement("beforebegin",createParaElement("beforebegin"));
+    container2.insertAdjacentElement("afterbegin",createParaElement("afterbegin"));
+    container2.insertAdjacentElement("beforeend",createParaElement("beforeend"));
+    container2.insertAdjacentElement("afterend",createParaElement("afterend"));
+
+  </script>
+</body>
+
+</html>

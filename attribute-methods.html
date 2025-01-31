@@ -23,22 +23,14 @@
     </p>
     <script>
         const target = document.getElementById("target");
-        const attributeNames = target.getAttributeNames();
-        for (const name of attributeNames){
-            console.log(`${name}:${target.getAttribute(name)}`);
-        }
         setTimeout(() => {
-            // ▼ class属性の値を更新する
-            target.setAttribute("class", "color-blue");
-            console.log(target.className);
-            // ▼ style属性を設定する
-            target.setAttribute("style", "font-weight:bold");
-        }, 5_000);
+            target.setAttribute("class","color-blue");
+            target.setAttribute("style","font-weight:bold")
+        }, 5000);
         setTimeout(() => {
-            // ▼ class属性を削除する
-            target.removeAttribute("class");
-            console.log(target.className);
+            target.removeAttribute("class")
         }, 10_000);
+
     </script>
 </body>
 
