@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>落ちるオブジェクトキャッチゲーム</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        #game-area {
+            position: relative;
+            width: 400px;
+            height: 500px;
+            background-color: lightblue;
+            margin: 20px auto;
+            border: 2px solid black;
+            overflow: hidden;
+        }
+        .player {
+            width: 80px;
+            height: 20px;
+            background-color: red;
+            position: absolute;
+            bottom: 10px;
+            left: 160px;
+        }
+        .ball {
+            width: 20px;
+            height: 20px;
+            background-color: yellow;
+            position: absolute;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <h1>落ちるオブジェクトキャッチゲーム</h1>
+    <p>スコア: <span id="score">0</span></p>
+    <button id="start-btn">ゲームスタート</button>
+    <div id="game-area">
+        <div class="player"></div>
+    </div>
+    <script>
+        const gameArea = document.getElementById("game-area");
+        const player = document.querySelector(".player");
+        const scoreDisplay = document.getElementById("score");
+        const startButton = document.getElementById("start-btn");
+
+        let score = 0;
+        let playerSpeed = 40;
+        let gameActive = false;
+
+        // プレイヤーの移動（矢印キー）
+        document.addEventListener("keydown", (event) => {
+            let playerX = player.offsetLeft;
+            if (event.key === "ArrowLeft" && playerX > 0) {
+                player.style.left = playerX - playerSpeed + "px";
+            } else if (event.key === "ArrowRight" && playerX < gameArea.clientWidth - player.clientWidth) {
+                player.style.left = playerX + playerSpeed + "px";
+            }
+        });
+
+        // マウスでプレイヤーを動かす
+        gameArea.addEventListener("mousemove", (event) => {
+            let x = event.clientX - gameArea.offsetLeft - (player.clientWidth / 2);
+            if (x >= 0 && x <= gameArea.clientWidth - player.clientWidth) {
+                player.style.left = x + "px";
+            }
+        });
+
+        // ボールを作成して落とす
+        function createBall() {
+            if (!gameActive) return;
+
+            let ball = document.createElement("div");
+            ball.classList.add("ball");
+            ball.style.left = Math.random() * (gameArea.clientWidth - 20) + "px";
+            ball.style.top = "0px";
+            gameArea.appendChild(ball);
+
+            let fallInterval = setInterval(() => {
+                ball.style.top = ball.offsetTop + 5 + "px";
+
+                // 当たり判定（プレイヤーがキャッチしたか？）
+                if (isCollision(ball, player)) {
+                    ball.remove();
+                    score++;
+                    scoreDisplay.textContent = score;
+                    clearInterval(fallInterval);
+                }
+
+                // ボールが下まで落ちたら消す
+                if (ball.offsetTop > gameArea.clientHeight) {
+                    ball.remove();
+                    clearInterval(fallInterval);
+                }
+            }, 30);
+        }
+
+        // 衝突判定
+        function isCollision(obj1, obj2) {
+            let rect1 = obj1.getBoundingClientRect();
+            let rect2 = obj2.getBoundingClientRect();
+            return (
+                rect1.left < rect2.right &&
+                rect1.right > rect2.left &&
+                rect1.top < rect2.bottom &&
+                rect1.bottom > rect2.top
+            );
+        }
+
+        // ゲーム開始
+        startButton.addEventListener("click", () => {
+            score = 0;
+            scoreDisplay.textContent = score;
+            gameActive = true;
+            startButton.disabled = true;
+
+            // ボールを定期的に落とす
+            let gameInterval = setInterval(createBall, 1000);
+
+            // 15秒後にゲーム終了
+            setTimeout(() => {
+                gameActive = false;
+                clearInterval(gameInterval);
+                startButton.disabled = false;
+                alert("ゲーム終了！スコア: " + score);
+            }, 15000);
+        });
+    </script>
+</body>
+</html>

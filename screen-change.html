@@ -26,20 +26,27 @@
     </section>
     <script>
         // ▼ スマートフォンなどで画面の向きが変わったときに起きるイベント
-        const orientation = document.getElementById("orientation") 
+        // 現在の画面の向きを角度で表示する
+        // 画面の向きが変わったら それに伴い角度も変化させる
+        const orientation = document.getElementById("orientation");
         orientation.textContent = screen.orientation.angle;
         screen.orientation.addEventListener("change",()=>{
             orientation.textContent = screen.orientation.angle;
-        })
+        });
 
         // ▼ windowサイズが変更されたときに起きるイベント
+        // 画面のサイズを表示する。
+        // windowのサイズが変わったら、それに伴い表示しているサイズも変える
         const windowSize = document.getElementById("windowSize");
-        windowSize.textContent = `Width:${innerWidth} Height:${innerHeight}`
+        windowSize.textContent = `width:${innerWidth} height:${innerHeight}`;
         window.addEventListener("resize",()=>{
-            windowSize.textContent = `Width:${innerWidth} Height:${innerHeight}`
+            windowSize.textContent = `width:${innerWidth} height:${innerHeight}`;
         })
 
+
         // ▼ 要素をフルスクリーンモードで表示したときに起きるイベント
+        // クリックするとフルスクリーンモードで表示させる
+        // フルスクリーンモードか否かでボタンの表示を変える
         const divElm = document.getElementById("fullscreen-div");
         const btnElm = document.getElementById("toggle-fullscreen");
 
@@ -50,11 +57,9 @@
                 divElm.requestFullscreen();
             }
         });
-
-        divElm.addEventListener("fullScreenChange",()=>{
-            btnElm.textContent = document.fullscreenElement ? "フルスクリーンを終了": "フルスクリーンを開始" ;
-        });
-
+        divElm.addEventListener("fullscreenchange",()=>{
+            btnElm.textContent = document.fullscreenElement ? "フルスクリーンを終了" : "フルスクリーンを開始";
+        })
 
     </script>
 </body>

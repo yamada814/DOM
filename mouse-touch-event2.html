@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mouseover と mouseenter の伝播の違い</title>
+    <style>
+        .box {
+            width: 300px;
+            height: 300px;
+            background-color: lightblue;
+            position: relative;
+            text-align: center;
+            line-height: 300px;
+            font-size: 20px;
+        }
+        .child {
+            width: 150px;
+            height: 150px;
+            background-color: lightpink;
+            position: absolute;
+            top: 75px;
+            left: 75px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>mouseover の動作（子要素に移動しても発火）</h2>
+    <div id="mouseover-box" class="box">
+        親 (div1)
+        <div class="child">子 (div2)</div>
+    </div>
+
+    <h2>mouseenter の動作（子要素に移動しても発火しない）</h2>
+    <div id="mouseenter-box" class="box">
+        親 (div4)
+        <div class="child">子 (div5)</div>
+    </div>
+
+    <script>
+        const mouseoverBox = document.getElementById("mouseover-box");
+        const mouseenterBox = document.getElementById("mouseenter-box");
+
+        // mouseover（親 → 子に移動しても発火する）
+        mouseoverBox.addEventListener("mouseover", () => {
+            mouseoverBox.style.backgroundColor = "#ccc";
+            console.log("🐭 mouseover 発生！（親 → 子も含む）");
+        });
+
+        mouseoverBox.addEventListener("mouseout", () => {
+            mouseoverBox.style.backgroundColor = "lightblue";
+        });
+
+        // mouseenter（親 → 子に移動しても発火しない）
+        mouseenterBox.addEventListener("mouseenter", () => {
+            mouseenterBox.style.backgroundColor = "#ffcc00";
+            console.log("🚀 mouseenter 発生！（親に入ったときのみ）");
+        });
+
+        mouseenterBox.addEventListener("mouseleave", () => {
+            mouseenterBox.style.backgroundColor = "lightblue";
+        });
+    </script>
+
+</body>
+</html>
