@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>絵の具混色アプリ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        .color-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .color-box {
+            width: 50px;
+            height: 50px;
+            border: 1px solid #000;
+            cursor: pointer;
+        }
+        .result {
+            width: 100px;
+            height: 100px;
+            margin: 20px auto;
+            border: 2px solid black;
+        }
+    </style>
+</head>
+<body>
+    <h1>絵の具混色アプリ</h1>
+    <div class="color-container">
+        <div class="color-box" id="redBox" style="background-color: red;" onclick="incrementRed()"></div>
+        <span id="redCount">0</span>
+        <div class="color-box" id="blueBox" style="background-color: blue;" onclick="incrementBlue()"></div>
+        <span id="blueCount">0</span>
+    </div>
+    <button onclick="mixColors()">混ぜる</button>
+    <div class="result" id="mixedColor"></div>
+    <script>
+        let redCount = 0;
+        let blueCount = 0;
+        
+        function incrementRed() {
+            redCount++;
+            document.getElementById("redCount").innerText = redCount;
+        }
+        
+        function incrementBlue() {
+            blueCount++;
+            document.getElementById("blueCount").innerText = blueCount;
+        }
+        
+        // function mixColors() {
+        //     const total = redCount + blueCount;
+        //     if (total === 0) return;
+            
+        //     const redRatio = redCount / total;
+        //     const blueRatio = blueCount / total;
+            
+        //     const mixedR = Math.round(255 * redRatio);
+        //     const mixedG = 0;
+        //     const mixedB = Math.round(255 * blueRatio);
+            
+        //     const mixedColor = `rgb(${mixedR}, ${mixedG}, ${mixedB})`;
+        //     document.getElementById("mixedColor").style.backgroundColor = mixedColor;
+        // }
+        function mixColors() {
+            const total = redCount + blueCount;
+            if (total === 0) return;
+
+            const redRatio = redCount / total;
+            const blueRatio = blueCount / total;
+
+            // 減法混色: 絵の具の混色をシミュレーション
+            const mixedC = blueRatio;  // シアン成分
+            const mixedM = redRatio;   // マゼンタ成分
+            const mixedY = 0;          // イエロー成分なし（赤と青のみ）
+
+            // CMY を RGB に変換
+            const mixedR = Math.round(255 * (1 - mixedC));
+            const mixedG = Math.round(255 * (1 - mixedM));
+            const mixedB = Math.round(255 * (1 - mixedY));
+
+            const mixedColor = `rgb(${mixedR}, ${mixedG}, ${mixedB})`;
+            document.getElementById("mixedColor").style.backgroundColor = mixedColor;
+        }
+
+    </script>
+</body>
+</html>

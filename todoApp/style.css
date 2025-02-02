@@ -1,0 +1,92 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 16px;
+    outline: none;
+}
+
+html {
+    background-color: lightseagreen;
+}
+
+body {
+    min-width: 800px;
+}
+
+header,
+main {
+    box-sizing: border-box;
+    padding: 1rem;
+    text-align: center;
+}
+
+header h1 {
+    color: white;
+    font-size: 2rem;
+}
+
+main>div {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+#newTask {
+    border: none;
+    height: 2rem;
+    padding: 0 1rem;
+    border-radius: 1rem 0 0 1rem;
+    box-shadow: 0px 3px darkcyan;
+}
+
+#addBtn {
+    border: none;
+    color: darkslategrey;
+    font-weight: bold;
+    background-color: turquoise;
+    transform: translateY(-2px);
+    height: 2rem;
+    padding: 0 1rem;
+    border-radius: 0 1rem 1rem 0;
+    box-shadow: 0px 3px darkslategrey;
+}
+
+#addBtn:active {
+    color: turquoise;
+    background-color: darkslategrey;
+    box-shadow: none;
+    transform: translateY(1px);
+}
+
+ul#todos {
+    display: inline-block;
+    background-color: white;
+    list-style: none;
+    border-radius: 10px;
+    color: black;
+    box-shadow: 5px 5px darkcyan;
+}
+
+ul#todos li {
+    box-sizing: border-box;
+    padding: 0.5rem 1rem;
+}
+
+ul#todos li:not(:last-child) {
+    border-bottom: 1px solid gray;
+}
+
+ul#todos li span {
+    display: inline-block;
+    text-align: left;
+    width: 40em;
+    padding: 0 1em;
+}
+
+ul#todos li button {
+    color: white;
+    background-color: darkcyan;
+    padding: 0.25rem 1rem;
+    border: none;
+    border-radius: 5px;
+}

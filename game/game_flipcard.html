@@ -5,7 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>flipcard</title>
     <style>
-        #container{
+        body{
+            position: relative;
+            z-index: 1;
+        }
+        #container1,#container2{
+            position: absolute;
             height: 800px;
             width: 450px;
             background-color: lightgoldenrodyellow;
@@ -14,54 +19,46 @@
             grid-template-rows: repeat(4,1fr);
             gap: 20px;
         }
-        .card{
+        #container1{
+            z-index: 3;
+        }
+        #container2{
+            z-index: 2;
+        }
+        .backCard{
             background-color:lightsalmon;
             box-sizing: border-box;
             font-size: 30px;
             padding-top: 50%;
             text-align: center;           
         }
-        .clickedcard{
+        .frontCard{
             background-color: white;
             box-sizing: border-box;
             font-size: 30px;
             padding-top: 50%;
-            text-align: center;  
+            text-align: center;            
         }
+        .clickedcard{
+            background-color: red;
+        }
+
     </style>
 </head>
 <body>
-    <div id="container">
-        <div id="card1" class = "card">?</div>
-        <div id="card2" class = "card">?</div>
-        <div id="card3" class = "card">?</div>
-        <div id="card4" class = "card">?</div>
-        <div id="card5" class = "card">?</div>
-        <div id="card6" class = "card">?</div>
-        <div id="card7" class = "card">?</div>
-        <div id="card8" class = "card">?</div>
-        <div id="card9" class = "card">?</div>
-        <div id="card10" class = "card">?</div>
-        <div id="card11" class = "card">?</div>
-        <div id="card12" class = "card">?</div>
+    <div id="container1">     
+    </div>
+    <div id="container2">
     </div>
     <script>
-        const cards = document.getElementsByClassName("card");
-        const nums = [];
-        for(let i =1;i<=12;i++){
-            nums.push(i);
-        }
-        // console.log(nums);
-        for(const card of cards){
-            card.addEventListener("click",()=>{
-                card.classList.toggle("clickedcard");
-                const nums = [1,1,2,2,3,3,4,4,5,5,6,6];
-                nums.sort(()=>Math.random() - 0.5);
-                for(const num of nums){
-                    card.textContent = card.classList.contains("clickedcard") ? num : "?";
-                }
+        const backCards = document.querySelectorAll(".backCard");
+        const frontCards = document.querySelectorAll(".frontCard");
+        backCards.forEach(backCard =>{
+            backCard.addEventListener("click",()=>{
+   
             })
-        }
+        })
+
     </script>
     
 </body>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>住所検索アプリ</title>
+</head>
+<body>
+    <h1>住所検索アプリ</h1>
+    <div>
+        <label for="firstcode">郵便番号:</label>
+        <input type="text" id="firstcode" size="3" minlength="3" maxlength="3">-
+        <input type="text" id="lastcode" size="4" minlength="4" maxlength="4">
+        <button id="searchbtn">検索</button>
+    </div>
+    <div>
+        <p>検索結果：<span id="result"></span></p>
+    </div>
+    <script src="./script.js"></script>   
+</body>
+</html>
