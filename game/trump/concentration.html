@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>カードシャッフル</title>
+    <style>
+        #cardField {
+            box-sizing: border-box;
+            padding: 10px;
+            border: 1px solid black;
+            display: flex;
+            width: 300px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        #cardField .card {
+            box-sizing: border-box;
+            padding: 30px;
+            margin: 10px;
+            background-color: lightgray;
+            user-select: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="controlPanel">
+        <button id="shuffleBtn" type="button">シャッフル</button>
+    </div>
+    <div id="cardField"></div>
+    <script>
+        const cardList = ["1", "1", "2", "2", "3", "3", "4", "4"];
+        const cardField = document.querySelector("#cardField");
+        const shuffleBtn = document.querySelector("#shuffleBtn");
+        function shuffle(array) {
+            const copiedArray = [...array];
+            const shuffledArray = [];
+            for (let i = 0; i < array.length; i++) {
+                const index = Math.floor(Math.random() * copiedArray.length);
+                shuffledArray.push(copiedArray.splice(index, 1).join());
+            }
+            return shuffledArray;
+        }
+        function openCard(event) {
+            event.stopPropagation();
+            const target = event.target;
+            target.textContent = target.number;
+            target.removeEventListener("click", openCard);
+        }
+        shuffleBtn.addEventListener("click", () => {
+            cardField.innerHTML = null;
+            const shuffledCardList = shuffle(cardList);
+
+            cardField.append(
+                ...shuffledCardList.map((val) => {
+                    const card = document.createElement("div");
+                    card.classList.add("card");
+                    card.number = val;
+                    card.textContent = "?";
+                    card.addEventListener("click", openCard);
+                    return card;
+                })
+            );
+        })
+    </script>
+</body>
+
+</html>
