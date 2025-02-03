@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        #container{
+            display: flex;
+        }
+        .label1,.label2,.up,.down{
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 0px;
+        }
+        .box{
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+            margin: 20px;
+        }
+        #resultBox{
+            width: 150px;
+            height: 150px;
+            border: 1px solid black;
+        }
+        #redBox{
+            background-color: #ff0000;
+        }
+        #greenBox{
+            background-color: #00ff00;
+        }
+        #blueBox{
+            background-color: #0000ff;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div>
+            <div class="up">▲</div>
+            <div class="down">▼</div>
+        </div>
+        <div class="label1">R:</div>
+        <div class="label2" id="redLabel">0</div>
+        <div class="box" id="redBox"></div>
+        
+        <div>
+
+            <div class="up">▲</div>
+            <div class="down">▼</div> 
+        </div>
+        <div class="label1">G:</div>
+        <div class="label2" id="greenLabel">0</div>
+        <div class="box" id="greenBox"></div>
+        
+        <div>
+
+            <div class="up">▲</div>
+            <div class="down">▼</div>
+        </div>
+        <div class="label1">B:</div>
+        <div class="label2" id="blueLabel">0</div> 
+        <div class="box" id="blueBox"></div>
+    </div>
+        <div>混色結果</div>
+        <div id="resultBox"></div>
+
+    <script src="colormixscript.js"></script>
+</body>
+</html>

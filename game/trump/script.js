@@ -5,6 +5,13 @@ const nums = ["1", "1", "2", "2", "3", "3"];
 let openNums = [];
 let matchedNums = [];
 
+let startTime;
+let endTime;
+
+function getTime(startTime, endTime) {
+    const time = (endTime - startTime) / 1000;
+    return Math.floor(time);
+}
 
 
 function shuffle(array) {
@@ -41,11 +48,13 @@ function checkCard(openNums) {
         console.log("NG");
         closeCard(openNums);
     }
-    if (matchedNums.length === 3) {
-        console.log("くりあ");
+    if (matchedNums.length === nums.length / 2) {
+        // console.log("クリア！");
+        endTime = Date.now();
+        console.log(endTime);
         
         const clear = document.createElement("div");
-        clear.textContent = "クリア!";
+        clear.innerText = `クリア!\n\nタイム:${getTime(startTime, endTime)}秒`;
         clear.setAttribute("class","clear")
         container.appendChild(clear);
     }
@@ -57,9 +66,11 @@ function closeCard(openNums) {
             card.textContent = "?"
             card.addEventListener("click", openCard);
         }
-    },1500)    
+    },500)    
 }
-startbtn.addEventListener("click", () => {
+startbtn.addEventListener("click", (event) => {
+    startTime = Date.now();
+    console.log(startTime);
     container.innerHTML = null;
     matchedNums = [];
     const shuffledCardList = shuffle(nums);
