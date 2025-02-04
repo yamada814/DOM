@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>flipcard</title>
+    <style>
+        body {
+            position: relative;
+            z-index: 1;
+        }
+        #container {
+            position: relative;
+            height: 800px;
+            width: 450px;
+            background-color: lightgoldenrodyellow;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(4, 1fr);
+            gap: 20px;
+            perspective: 1000px;
+        }
+        .card {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+            cursor: pointer;
+        }
+        .flipped {
+            transform: rotateY(180deg);
+        }
+        .card .front, .card .back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            border: 1px solid #000;
+        }
+        .card .back {
+            background-color: lightsalmon;
+        }
+        .card .front {
+            background-color: white;
+            transform: rotateY(180deg);
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <!-- 12枚のカード -->
+        <div class="card" data-index="1">
+            <div class="back">?</div>
+            <div class="front">1</div>
+        </div>
+        <div class="card" data-index="2">
+            <div class="back">?</div>
+            <div class="front">2</div>
+        </div>
+        <div class="card" data-index="3">
+            <div class="back">?</div>
+            <div class="front">3</div>
+        </div>
+        <div class="card" data-index="4">
+            <div class="back">?</div>
+            <div class="front">4</div>
+        </div>
+        <div class="card" data-index="5">
+            <div class="back">?</div>
+            <div class="front">5</div>
+        </div>
+        <div class="card" data-index="6">
+            <div class="back">?</div>
+            <div class="front">6</div>
+        </div>
+        <div class="card" data-index="7">
+            <div class="back">?</div>
+            <div class="front">1</div>
+        </div>
+        <div class="card" data-index="8">
+            <div class="back">?</div>
+            <div class="front">2</div>
+        </div>
+        <div class="card" data-index="9">
+            <div class="back">?</div>
+            <div class="front">3</div>
+        </div>
+        <div class="card" data-index="10">
+            <div class="back">?</div>
+            <div class="front">4</div>
+        </div>
+        <div class="card" data-index="11">
+            <div class="back">?</div>
+            <div class="front">5</div>
+        </div>
+        <div class="card" data-index="12">
+            <div class="back">?</div>
+            <div class="front">6</div>
+        </div>
+    </div>
+    
+    <script>
+        const cards = document.querySelectorAll(".card");
+
+        cards.forEach(card => {
+            card.addEventListener("click", () => {
+                card.classList.toggle("flipped");
+            });
+        });
+    </script>
+</body>
+</html>
