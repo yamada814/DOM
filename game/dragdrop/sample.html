@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ドラッグ＆ドロップ</title>
+    <style>
+        #circleBox {
+            width: 300px;
+            height: 300px;
+            border: 1px solid black;
+            position: relative;
+        }
+        #circle {
+            width: 50px;
+            height: 50px;
+            border: 1px solid black;
+            border-radius: 50%;
+            position: absolute;
+            cursor: grab;
+        }
+    </style>
+</head>
+<body>
+    <div id="circleBox">
+        <div id="circle"></div>
+    </div>
+
+    <script>
+        const circle = document.getElementById("circle");
+        const circleBox = document.getElementById("circleBox");
+
+        let isDragging = false;
+        let offsetX, offsetY;
+
+        circle.addEventListener("mousedown", (e) => {
+            isDragging = true;
+            offsetX = e.clientX - circle.getBoundingClientRect().left;
+            offsetY = e.clientY - circle.getBoundingClientRect().top;
+            circle.style.cursor = "grabbing";
+        });
+
+        document.addEventListener("mousemove", (e) => {
+            if (!isDragging) return;
+
+            let x = e.clientX - offsetX - circleBox.getBoundingClientRect().left;
+            let y = e.clientY - offsetY - circleBox.getBoundingClientRect().top;
+
+            // `circleBox` の範囲内に制限
+            const boxRect = circleBox.getBoundingClientRect();
+            const circleRect = circle.getBoundingClientRect();
+
+            if (x < 0) x = 0;
+            if (x > boxRect.width - circleRect.width) x = boxRect.width - circleRect.width;
+
+            if (y < 0) y = 0;
+            if (y > boxRect.height - circleRect.height) y = boxRect.height - circleRect.height;
+
+            circle.style.left = `${x}px`;
+            circle.style.top = `${y}px`;
+        });
+
+        document.addEventListener("mouseup", () => {
+            isDragging = false;
+            circle.style.cursor = "grab";
+        });
+    </script>
+</body>
+</html>
