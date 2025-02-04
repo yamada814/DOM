@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>シューティングゲーム</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+        #game-area {
+            position: relative;
+            width: 600px;
+            height: 400px;
+            background-color: darkblue;
+            margin: 20px auto;
+            border: 2px solid white;
+            overflow: hidden;
+        }
+        .player {
+            width: 40px;
+            height: 40px;
+            background-color: red;
+            position: absolute;
+            bottom: 10px;
+            left: 280px;
+            border-radius: 50%;
+        }
+        .bullet {
+            width: 5px;
+            height: 10px;
+            background-color: yellow;
+            position: absolute;
+        }
+        .enemy {
+            width: 40px;
+            height: 40px;
+            background-color: green;
+            position: absolute;
+            top: 10px;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <h1>シューティングゲーム</h1>
+    <p>スコア: <span id="score">0</span></p>
+    <div id="game-area">
+        <div class="player"></div>
+    </div>
+    <script>
+        const gameArea = document.getElementById("game-area");
+        const player = document.querySelector(".player");
+        const scoreDisplay = document.getElementById("score");
+        let score = 0;
+        let playerSpeed = 10;
+        let bullets = [];
+        let enemies = [];
+
+        // プレイヤーの移動
+        document.addEventListener("keydown", (event) => {
+            let playerX = player.offsetLeft;
+            if (event.key === "ArrowLeft" && playerX > 0) {
+                player.style.left = playerX - playerSpeed + "px";
+            } else if (event.key === "ArrowRight" && playerX < gameArea.clientWidth - player.clientWidth) {
+                player.style.left = playerX + playerSpeed + "px";
+            } else if (event.key === " " || event.key === "Spacebar") {
+                shootBullet();
+            }
+        });
+
+        // 弾を撃つ
+        function shootBullet() {
+            let bullet = document.createElement("div");
+            bullet.classList.add("bullet");
+            bullet.style.left = player.offsetLeft + 17 + "px";
+            bullet.style.bottom = "50px";
+            gameArea.appendChild(bullet);
+            bullets.push(bullet);
+        }
+
+        // 敵を生成
+        function createEnemy() {
+            let enemy = document.createElement("div");
+            enemy.classList.add("enemy");
+            enemy.style.left = Math.random() * (gameArea.clientWidth - 40) + "px";
+            gameArea.appendChild(enemy);
+            enemies.push(enemy);
+        }
+
+        // ゲームの更新（弾の移動 & 敵の移動 & 当たり判定）
+        function updateGame() {
+            bullets.forEach((bullet, bulletIndex) => {
+                bullet.style.bottom = bullet.offsetTop + 10 + "px";
+                if (bullet.offsetTop < 0) {
+                    bullet.remove();
+                    bullets.splice(bulletIndex, 1);
+                }
+            });
+
+            enemies.forEach((enemy, enemyIndex) => {
+                enemy.style.top = enemy.offsetTop + 2 + "px";
+                if (enemy.offsetTop > gameArea.clientHeight) {
+                    enemy.remove();
+                    enemies.splice(enemyIndex, 1);
+                }
+            });
+
+            bullets.forEach((bullet, bulletIndex) => {
+                enemies.forEach((enemy, enemyIndex) => {
+                    if (isCollision(bullet, enemy)) {
+                        bullet.remove();
+                        enemy.remove();
+                        bullets.splice(bulletIndex, 1);
+                        enemies.splice(enemyIndex, 1);
+                        score++;
+                        scoreDisplay.textContent = score;
+                    }
+                });
+            });
+
+            requestAnimationFrame(updateGame);
+        }
+
+        // 当たり判定（衝突チェック）
+        function isCollision(obj1, obj2) {
+            let rect1 = obj1.getBoundingClientRect();
+            let rect2 = obj2.getBoundingClientRect();
+            return (
+                rect1.left < rect2.right &&
+                rect1.right > rect2.left &&
+                rect1.top < rect2.bottom &&
+                rect1.bottom > rect2.top
+            );
+        }
+
+        // 敵を定期的に生成
+        setInterval(createEnemy, 1500);
+        updateGame();
+    </script>
+</body>
+</html>

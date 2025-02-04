@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>マウス操作イベントの座標取得</title>
+  <style>
+    #mybox{
+      position: relative;
+      left: 100px;
+      top: 50px;
+      margin: 50px;
+      width: 200px;
+      height: 100px;
+      padding: 20px;
+      border: 50px solid black;
+    }
+    #coordinate{
+      position: relative;
+      background-color: lightcoral;
+    }
+    .space{
+        height: 500px;
+        background-color: #ccc;
+
+    }
+  </style>
+</head>
+<body>
+  <h1>マウス操作イベントの座標取得のサンプル</h1>
+  <div class="space"></div>
+  <div class="space"></div>
+  <div id="mybox">aaaaa<br />aaaaa</div>
+  <div id="coordinate"></div>
+  <script>
+    const mybox = document.getElementById("mybox");
+    const coordinateElm = document.getElementById("coordinate");
+    mybox.addEventListener("click",(event)=>{
+        coordinateElm.innerHTML = `
+        [offsetX:${event.offsetX}, offsetY:${event.offsetY}]<br />
+        [clientX:${event.clientX}, clientY:${event.clientY}]<br />
+        [pageX:${event.pageX}, pageY:${event.pageY}]<br />
+        [screenX:${event.screenX}, screenY:${event.screenY}]
+        `;
+    });
+  </script>
+</body>
+</html>

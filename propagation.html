@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>イベントの伝搬</title>
+  <style>
+    .outer {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      background-color: black;
+      color: white;
+    }
+
+    .inner {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      top: 50px;
+      left: 50px;
+      background-color: white;
+      color: black
+    }
+  </style>
+</head>
+
+<body data-myname="body">
+  <h1>イベントの伝搬のサンプル</h1>
+  <div class="outer" data-myname="outer">outer
+    <div class="inner" data-myname="inner">inner</div>
+  </div>
+
+  <script>
+    document.dataset = {
+      myname: "document"
+    }
+
+    // ▼ デフォルトでは子要素で発生したイベントが親要素へ向かって伝搬される
+    function clickHandler(event) {
+      console.log("click:" + event.currentTarget.dataset.myname);
+    }
+    document.querySelector(".outer").addEventListener("click", clickHandler);
+    document.querySelector(".inner").addEventListener("click", clickHandler);
+    document.body.addEventListener("click", clickHandler)
+    document.addEventListener("click", clickHandler);
+
+    // ▼ sotpPropagation()メソッドを実行した場合は親要素へイベントが伝搬されない
+    function mousedownHandler(event) {
+      event.stopPropagation();
+      console.log("mousedonw:" + event.currentTarget.dataset.myname);
+    }
+    document.querySelector(".outer").addEventListener("mousedown", mousedownHandler);
+    document.querySelector(".inner").addEventListener("mousedown", mousedownHandler);
+    document.body.addEventListener("mousedown", mousedownHandler);
+    document.addEventListener("mousedown", mousedownHandler);    
+  </script>
+</body>
+
+</html>

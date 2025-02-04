@@ -1,5 +1,3 @@
-const className = "color-red font-bold font-24";
-const classNameSplit = className.split("font-bold");
-console.log(classNameSplit);//["color-red "," font-24"]
-const classNameSplitJoin = classNameSplit.join("");
-console.log(classNameSplitJoin);//"color-red font-24"
+for (let i = 0; i < 16; i++){
+    console.log(i.toString(16));   
+}

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>モグラたたきゲーム</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        #game-board {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-gap: 10px;
+            margin: 20px auto;
+            width: 320px;
+        }
+        .hole {
+            width: 100px;
+            height: 100px;
+            background-color: #8B5A2B;
+            border-radius: 50%;
+            position: relative;
+        }
+        .mole {
+            width: 80px;
+            height: 80px;
+            background-color: brown;
+            border-radius: 50%;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            cursor: pointer;
+            display: none;
+        }
+        #start-btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>モグラたたきゲーム</h1>
+    <p>スコア: <span id="score">0</span></p>
+    <button id="start-btn">ゲームスタート</button>
+    <div id="game-board">
+        <div class="hole"><div class="mole"></div></div>
+        <div class="hole"><div class="mole"></div></div>
+        <div class="hole"><div class="mole"></div></div>
+        <div class="hole"><div class="mole"></div></div>
+        <div class="hole"><div class="mole"></div></div>
+        <div class="hole"><div class="mole"></div></div>
+    </div>
+    <script>
+        const moles = document.querySelectorAll(".mole");
+        const scoreDisplay = document.getElementById("score");
+        const startButton = document.getElementById("start-btn");
+        let score = 0;
+        let gameInterval;
+
+        function randomMole() {
+            moles.forEach(mole => mole.style.display = "none"); // すべて隠す
+            let randomIndex = Math.floor(Math.random() * moles.length);
+            let mole = moles[randomIndex];
+            mole.style.display = "block"; // ランダムなモグラを出現
+            setTimeout(() => mole.style.display = "none", 800); // 0.8秒で消える
+        }
+
+        function startGame() {
+            score = 0;
+            scoreDisplay.textContent = score;
+            startButton.disabled = true;
+            gameInterval = setInterval(randomMole, 1000); // 1秒ごとにモグラ出現
+            setTimeout(() => {
+                clearInterval(gameInterval);
+                startButton.disabled = false;
+                alert("ゲーム終了！スコア: " + score);
+            }, 15000); // 15秒間のゲーム
+        }
+
+        moles.forEach(mole => {
+            mole.addEventListener("click", () => {
+                if (mole.style.display === "block") {
+                    score++;
+                    scoreDisplay.textContent = score;
+                    mole.style.display = "none"; // 叩かれたら消える
+                }
+            });
+        });
+
+        startButton.addEventListener("click", startGame);
+    </script>
+</body>
+</html>

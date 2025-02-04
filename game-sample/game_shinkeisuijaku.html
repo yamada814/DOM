@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>神経衰弱ゲーム</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        #game-board {
+            display: grid;
+            grid-template-columns: repeat(4, 100px);
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .card {
+            width: 100px;
+            height: 150px;
+            background-color: gray;
+            color: white;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        .flipped {
+            background-color: white;
+            color: black;
+            border: 2px solid black;
+        }
+        .matched {
+            background-color: lightgreen;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>神経衰弱ゲーム</h1>
+    <p>ペアをすべて見つけよう！</p>
+    <div id="game-board"></div>
+    <button id="restart-btn">リスタート</button>
+
+    <script>
+        const gameBoard = document.getElementById("game-board");
+        const restartBtn = document.getElementById("restart-btn");
+        let cards = [];
+        let flippedCards = [];
+        let matchedPairs = 0;
+
+        // カードのペアを作る（2つずつ同じ数字を配置）
+        const cardValues = ["🍎", "🍌", "🍇", "🍒", "🥝", "🍍", "🍉", "🍑"];
+        let deck = [...cardValues, ...cardValues]; // 2セット作成
+        deck = deck.sort(() => Math.random() - 0.5); // シャッフル
+
+        // ゲームボードにカードを追加
+        deck.forEach(value => {
+            const card = document.createElement("div");
+            card.classList.add("card");
+            card.dataset.value = value;
+            card.textContent = "❓"; // 初期状態
+            gameBoard.appendChild(card);
+            cards.push(card);
+
+            // クリックイベントを追加
+            card.addEventListener("click", () => flipCard(card));
+        });
+
+        function flipCard(card) {
+            if (flippedCards.length < 2 && !card.classList.contains("flipped")) {
+                card.classList.add("flipped");
+                card.textContent = card.dataset.value;
+                flippedCards.push(card);
+                
+                if (flippedCards.length === 2) {
+                    setTimeout(checkMatch, 1000);
+                }
+            }
+        }
+
+        function checkMatch() {
+            const [card1, card2] = flippedCards;
+            if (card1.dataset.value === card2.dataset.value) {
+                card1.classList.add("matched");
+                card2.classList.add("matched");
+                matchedPairs++;
+                if (matchedPairs === cardValues.length) {
+                    setTimeout(() => alert("🎉 全部そろった！おめでとう！"), 500);
+                }
+            } else {
+                card1.textContent = "❓";
+                card2.textContent = "❓";
+                card1.classList.remove("flipped");
+                card2.classList.remove("flipped");
+            }
+            flippedCards = [];
+        }
+
+        // リスタートボタン
+        restartBtn.addEventListener("click", () => {
+            gameBoard.innerHTML = "";
+            matchedPairs = 0;
+            flippedCards = [];
+            deck = [...cardValues, ...cardValues].sort(() => Math.random() - 0.5);
+            cards = [];
+            deck.forEach(value => {
+                const card = document.createElement("div");
+                card.classList.add("card");
+                card.dataset.value = value;
+                card.textContent = "❓";
+                gameBoard.appendChild(card);
+                cards.push(card);
+                card.addEventListener("click", () => flipCard(card));
+            });
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>反射神経ゲーム</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        #game-area {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            background-color: lightblue;
+            margin: 20px auto;
+            border: 2px solid black;
+        }
+        .target {
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            position: absolute;
+            border-radius: 50%;
+            display: none;
+            cursor: pointer;
+        }
+        #start-btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>反射神経ゲーム</h1>
+    <p>スコア: <span id="score">0</span></p>
+    <p>リアクションタイム: <span id="reaction-time">--</span> ms</p>
+    <button id="start-btn">ゲームスタート</button>
+    <div id="game-area">
+        <div class="target"></div>
+    </div>
+
+    <script>
+        const gameArea = document.getElementById("game-area");
+        const target = document.querySelector(".target");
+        const scoreDisplay = document.getElementById("score");
+        const reactionTimeDisplay = document.getElementById("reaction-time");
+        const startButton = document.getElementById("start-btn");
+
+        let score = 0;
+        let startTime = 0;
+        let gameActive = false;
+
+        // ランダムな場所にターゲットを表示
+        function showTarget() {
+            if (!gameActive) return;
+
+            let x = Math.random() * (gameArea.clientWidth - 50);
+            let y = Math.random() * (gameArea.clientHeight - 50);
+
+            target.style.left = x + "px";
+            target.style.top = y + "px";
+            target.style.display = "block";
+
+            startTime = Date.now(); // クリック開始時間を記録
+        }
+
+        // ターゲットがクリックされた時
+        target.addEventListener("click", () => {
+            if (!gameActive) return;
+
+            let reactionTime = Date.now() - startTime;
+            reactionTimeDisplay.textContent = reactionTime;
+            score++;
+            scoreDisplay.textContent = score;
+            target.style.display = "none";
+
+            // 次のターゲットをランダムな時間で表示
+            setTimeout(showTarget, Math.random() * 2000 + 500);
+        });
+
+        // ゲーム開始
+        startButton.addEventListener("click", () => {
+            score = 0;
+            scoreDisplay.textContent = score;
+            reactionTimeDisplay.textContent = "--";
+            gameActive = true;
+            startButton.disabled = true;
+
+            setTimeout(showTarget, Math.random() * 2000 + 500); // 最初のターゲット表示
+
+            setTimeout(() => {
+                gameActive = false;
+                target.style.display = "none";
+                startButton.disabled = false;
+                alert("ゲーム終了！スコア: " + score);
+            }, 15000); // 15秒間のゲーム
+        });
+    </script>
+</body>
+</html>

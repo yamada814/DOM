@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>キー操作イベント</title>
+</head>
+
+<body>
+  <h1>キー操作イベントのサンプル</h1>
+  <div>
+    <p>codeプロパティ(keydown)：<span class="code keydown"></span></p>
+    <p>codeプロパティ(keypress)：<span class="code keypress"></span></p>
+    <p>codeプロパティ(keyup)：<span class="code keyup"></span></p>
+    <p>keyプロパティ(keydown)：<span class="key keydown"></span></p>
+    <p>keyプロパティ(keypress)：<span class="key keypress"></span></p>
+    <p>keyプロパティ(keyup)：<span class="key keyup"></span></p>    
+  </div>  
+  <script>
+    const codeKeydown = document.querySelector(".code.keydown");
+    const codeKeypress = document.querySelector(".code.keypress");
+    const codeKeyup = document.querySelector(".code.keyup");
+    const keyKeydown = document.querySelector(".key.keydown");
+    const keyKeypress = document.querySelector(".key.keypress");
+    const keyKeyup = document.querySelector(".key.keyup");
+    document.addEventListener("keydown", (event)=>{
+      console.log("keydown");
+      codeKeydown.textContent = event.code;
+      keyKeydown.textContent = event.key;
+    });
+    document.addEventListener("keypress", (event)=>{
+      console.log("keypress");
+      codeKeypress.textContent = event.code;
+      keyKeypress.textContent = event.key;
+    });
+    document.addEventListener("keyup", (event)=>{
+      console.log("keyup");
+      codeKeyup.textContent = event.code;
+      keyKeyup.textContent = event.key;
+    });
+  </script>
+</body>
+
+</html>

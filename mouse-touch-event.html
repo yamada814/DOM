@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>マウス操作／タッチ操作</title>
+  <style>
+    #myArea {
+      position: relative;
+      margin-top: 20px;
+      width: 300px;
+      height: 300px;
+      border: 20px solid black;
+    }
+
+    #myArea>div {
+      position: absolute;
+      display: block;
+      top: 10px;
+      left: 10px;
+      width: 100px;
+      height: 100px;
+      background-color: yellow;
+    }
+
+    #myTouchArea {
+      position: relative;
+      margin-top: 20px;
+      width: 300px;
+      height: 300px;
+      border: 20px solid black;
+    }
+
+    #myTouchArea>div {
+      position: absolute;
+      display: block;
+      top: 10px;
+      left: 10px;
+      width: 100px;
+      height: 100px;
+      background-color: yellow;
+    }
+
+    .event-container {
+      outline: 1px solid lightgray;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>マウス操作／タッチ操作のイベントのサンプル</h1>
+  <div class="event-container">
+    <h3>▼ mouseイベント</h3>
+    <div id="myArea">
+      <div></div>
+    </div>
+    <div id="mouseEventName">none</div>
+  </div>
+  <div class="event-container">
+    <h3>▼ touchイベント</h3>
+    <div id="myTouchArea">
+      <div></div>
+    </div>
+    <div id="touchEventName">none</div>
+  </div>
+  <script>
+    // -------------------------------- //
+    // ---- ▼ マウス操作のイベント ---- //
+    // ------------------------------- //
+    
+    const myArea = document.getElementById("myArea");
+    const mouseEventName = document.getElementById("mouseEventName");
+    // myArea.addEventListener("mousedown", (event) => {
+    //   mouseEventName.textContent = "mousedown";
+    // });
+    // myArea.addEventListener("mouseup", (event) => {
+    //   mouseEventName.textContent = "mouseup";
+    // });
+    // myArea.addEventListener("mouseenter", (event) => {
+    //   mouseEventName.textContent = "mouseenter";
+    // });
+    // myArea.addEventListener("mouseleave", (event) => {
+    //   mouseEventName.textContent = "mouseleave";
+    // });
+    // ▼ mouseenter や mouseleave を確認するときは mousemove はコメントアウトしておく
+    // myArea.addEventListener("mousemove", (event)=>{
+    //     mouseEventName.textContent = "mousemove";
+    // });
+
+    // ▼ mouseout と mouseover はひとつずつ確認する
+    //   mouseenter と mouseleave はコメントアウトしておく
+    // myArea.addEventListener("mouseout", (event) => {
+    //   mouseEventName.textContent = "mouseout";
+    // });
+    // myArea.addEventListener("mouseover", (event) => {
+    //   mouseEventName.textContent = "mouseover";
+    // });
+
+    // ▼ click は mousedown → mouseup の後に発生する
+    //  確認するときは mousedown や mouseup はコメントアウトしておく
+    // myArea.addEventListener("click", (event) => {
+    //   mouseEventName.textContent = "click";
+    // });
+    // ▼ dblclick は2回の click の後に発生する
+    myArea.addEventListener("dblclick", (event) => {
+      mouseEventName.textContent = "dblclick";
+    });
+
+    // ------------------------------- //
+    // ---- ▼ タッチ操作のイベント ---- //
+    // ------------------------------- //
+
+    // touchイベントの動作を確認するときは開発者向けツールの
+    // エミュレータを使用してAndroid端末やiOS端末を選択する
+    const myTouchArea = document.getElementById("myTouchArea");
+    const touchEventName = document.getElementById("touchEventName");
+    myTouchArea.addEventListener("touchstart", (event) => {
+      touchEventName.textContent = "touchstart";
+    });
+    myTouchArea.addEventListener("touchend", (event) => {
+      touchEventName.textContent = "touchend";
+    });
+    myTouchArea.addEventListener("touchmove", (event) => {
+      touchEventName.textContent = "touchmove";
+    });
+    // ▼ 開発者向けツールのエミュレータを使用しているときは
+    //   タッチ操作中に右クリックをするとキャンセル扱いになる
+    myTouchArea.addEventListener("touchcancel", (event) => {
+      touchEventName.textContent = "touchcancel";
+    });
+    //  ▼ タッチ操作でも click は 「touchstart → touchend」 と同じ扱いになる
+    //    確認するときは touchstart や touchend はコメントアウトしておく
+    // myTouchArea.addEventListener("click", (event) => {
+    //   touchEventName.textContent = "click";
+    // });
+  </script>
+</body>
+
+</html>

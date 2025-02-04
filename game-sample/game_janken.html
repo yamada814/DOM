@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>じゃんけんゲーム</title>
+</head>
+<body>
+    <h1>じゃんけんゲーム</h1>
+    <p>あなたの選択:</p>
+    <button class="choice" data-choice="グー">✊ グー</button>
+    <button class="choice" data-choice="チョキ">✌ チョキ</button>
+    <button class="choice" data-choice="パー">🖐 パー</button>
+    <p>結果: <span id="result">未対戦</span></p>
+
+    <script>
+        const choices = ["グー", "チョキ", "パー"];
+        const buttons = document.querySelectorAll(".choice");
+        const resultDisplay = document.getElementById("result");
+
+        buttons.forEach(button => {
+            button.addEventListener("click", () => {
+                const userChoice = button.dataset.choice;
+                const computerChoice = choices[Math.floor(Math.random() * 3)];
+                let result = "";
+
+                if (userChoice === computerChoice) {
+                    result = "引き分け！";
+                } else if (
+                    (userChoice === "グー" && computerChoice === "チョキ") ||
+                    (userChoice === "チョキ" && computerChoice === "パー") ||
+                    (userChoice === "パー" && computerChoice === "グー")
+                ) {
+                    result = "あなたの勝ち！🎉";
+                } else {
+                    result = "あなたの負け…😭";
+                }
+
+                resultDisplay.textContent = `あなた: ${userChoice} | 相手: ${computerChoice} → ${result}`;
+            });
+        });
+    </script>
+</body>
+</html>
