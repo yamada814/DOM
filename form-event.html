@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>フォーム関連のイベント</title>
+        <style>
+            input.error{
+                background-color: red;
+            }
+            div:has(input.error)::after{
+                display: inline;
+                content: "入力内容に誤りがあります";
+                color: red;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <head>
+            <h1>ユーザー登録</h1>
+        </head>
+        <main>
+
+            <form id="userform" action="#" method="get">
+                <fieldset>
+                    <legend>ユーザー情報</legend>
+                    <div>
+                        <label for="username">ユーザー名：</label>
+                        <input type="text" id="username" name="username" placeholder="英数字4文字以上"
+                            required autofocus>
+                    </div>
+                    <div>
+                        <label for="password">パスワード：</label>
+                        <input type="password" id="password" name="password" placeholder="英数字8文字以上"
+                            required>
+                    </div>
+                    <div>
+                        <span>契約プラン：</span>
+                        <label>
+                            <input type="radio" name="plan" value="1" required>通常会員
+                        </label>
+                        <label>
+                            <input type="radio" name="plan" value="2" required>プレミアム会員
+                        </label>
+                    </div>
+                    <div>
+                        <label for="usertype">属性：</label>
+                        <select name="usertype" id="usertype" required>
+                            <option value="" selected hidden>選択してください</option>
+                            <option value="1">会社員</option>
+                            <option value="2">会社経営</option>
+                            <option value="3">自営業</option>
+                            <option value="4">フリーター</option>
+                            <option value="5">学生</option>
+                            <option value="6">無職</option>
+                        </select>
+                    </div>
+                </fieldset>
+                <button type="submit">登録</button>
+            </form>
+        </main>
+        <script>
+            function validateFields(formData){
+                const isOK =
+                    // ユーザー名のチェック
+                    formData.get("username")?.match(/^\w{4,}$/) &&
+                    // パスワードのチェック
+                    formData.get("password")?.match(/^\w{8,}$/) &&
+                    // 契約プランのチェック
+                    formData.get("plan")?.match(/^[1-2]$/) &&
+                    // 属性のチェック
+                    formData.get("usertype")?.match(/^[1-6]$/) && true;
+                return isOK;
+            }
+            // フォームの送信（submitボタンのクリック) 時に発生するイベント
+            document.querySelector("#userform")
+                    .addEventListener("submit", (e)=>{
+                        // alert("登録ボタンが押下されました。");
+                        // --- ここにフィールドの入力値チェックの処理を記述
+                        // --- 不正な値があった場合は送信をキャンセル
+                        if(!validateFields(new FormData(e.target))){
+                            e.preventDefault();  // 送信のキャンセル
+                            alert("入力値に誤りがあります。");
+                            return;
+                        }
+                        alert("送信します。");
+                    });
+            // フィールドの値の更新とフォーカスが外れた際に発生するイベント
+            document.querySelector("#username")
+                    .addEventListener("change",(e)=>{
+                        // 入力値のチェック
+                        e.target.value.match(/^\w{4,}$/) ?
+                            e.target.classList.toggle("error", false) :
+                            e.target.classList.toggle("error", true);
+                    });
+            document.querySelector("#password")
+                    .addEventListener("change",(e)=>{
+                        // 入力値のチェック
+                        e.target.value.match(/^\w{8,}$/) ?
+                            e.target.classList.toggle("error", false) :
+                            e.target.classList.toggle("error", true);
+                    });
+            document.querySelector("#usertype")
+                    .addEventListener("change",(e)=>{
+                        alert(`${e.target.value}が選択されました。`);
+                    });
+            /*
+              ◆ その他のイベント
+              "focus"：<input>,<textarea>,<select> などの要素がフォーカスされたとき
+              "blur"：<input>,<textarea>,<select> などの要素からフォーカスが外れたとき
+              "keydown", "keyup", "keypress"：要素内でのキー操作時
+              "click"：<input>のtype="checkbox"やtype="radio"、<button>がクリックされたとき
+            */
+            // 例：ラジオボタンの選択(clickイベント)
+            document.querySelectorAll("input[name='plan']")
+                    .forEach((radioBtn)=>{
+                        radioBtn.addEventListener("click",(e)=>{
+                            alert(`${e.target.value}が選択されました。`);
+                        })
+                    });
+        </script>
+    </body>
+
+</html>

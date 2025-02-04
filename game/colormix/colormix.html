@@ -6,7 +6,7 @@
     <title>Document</title>
     <style>
 
-        #container{
+        #colerContainer{
             display: flex;
         }
         .label1,.label2,.up,.down{
@@ -24,49 +24,66 @@
             width: 150px;
             height: 150px;
             border: 1px solid black;
+            background-color: #000;
         }
-        #redBox{
+        #redBox .box{
             background-color: #ff0000;
         }
-        #greenBox{
+        #greenBox .box{
             background-color: #00ff00;
         }
-        #blueBox{
+        #blueBox .box{
             background-color: #0000ff;
+        }
+        #lightness{
+            position: relative;
+            border: 1px solid black;
+            width: 50px;
+            height: 160px;
+        }
+        #bar{
+            position: absolute;
+            top: 0px;
+            border: 1px solid black;
+            width: 50px;
+            height: 20px;
         }
 
     </style>
 </head>
 <body>
-    <div id="container">
-        <div>
+    <div id="colerContainer">
+        <div class="label1">R</div>
+        <div class="boxParent" id="redBox">
+            <div class="box" ></div>
             <div class="up">▲</div>
+            <div class="label2" id="redLabel">0</div>
             <div class="down">▼</div>
         </div>
-        <div class="label1">R:</div>
-        <div class="label2" id="redLabel">0</div>
-        <div class="box" id="redBox"></div>
         
-        <div>
-
+        <div class="label1">G</div>
+        <div class="boxParent" id="greenBox">
+            <div class="box" ></div>
             <div class="up">▲</div>
+            <div class="label2" id="greenLabel">0</div>
             <div class="down">▼</div> 
         </div>
-        <div class="label1">G:</div>
-        <div class="label2" id="greenLabel">0</div>
-        <div class="box" id="greenBox"></div>
         
-        <div>
-
+        <div class="label1">B</div>
+        <div class="boxParent" id="blueBox">
+            <div class="box" ></div>
             <div class="up">▲</div>
+            <div class="label2" id="blueLabel">0</div> 
             <div class="down">▼</div>
         </div>
-        <div class="label1">B:</div>
-        <div class="label2" id="blueLabel">0</div> 
-        <div class="box" id="blueBox"></div>
     </div>
+    <div id="resultContainer">
         <div>混色結果</div>
         <div id="resultBox"></div>
+    </div>
+    <div id="lightness">
+        <div id="bar"></div>
+    </div>
 
     <script src="colormixscript.js"></script>
 </body>

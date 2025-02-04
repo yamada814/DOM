@@ -71,12 +71,12 @@
     
     const myArea = document.getElementById("myArea");
     const mouseEventName = document.getElementById("mouseEventName");
-    // myArea.addEventListener("mousedown", (event) => {
-    //   mouseEventName.textContent = "mousedown";
-    // });
-    // myArea.addEventListener("mouseup", (event) => {
-    //   mouseEventName.textContent = "mouseup";
-    // });
+    myArea.addEventListener("mousedown", (event) => {
+      mouseEventName.textContent = "mousedown";
+    });
+    myArea.addEventListener("mouseup", (event) => {
+      mouseEventName.textContent = "mouseup";
+    });
     // myArea.addEventListener("mouseenter", (event) => {
     //   mouseEventName.textContent = "mouseenter";
     // });
@@ -93,9 +93,9 @@
     // myArea.addEventListener("mouseout", (event) => {
     //   mouseEventName.textContent = "mouseout";
     // });
-    // myArea.addEventListener("mouseover", (event) => {
-    //   mouseEventName.textContent = "mouseover";
-    // });
+    myArea.addEventListener("mouseover", (event) => {
+      mouseEventName.textContent = "mouseover";
+    });
 
     // ▼ click は mousedown → mouseup の後に発生する
     //  確認するときは mousedown や mouseup はコメントアウトしておく
