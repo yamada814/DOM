@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    :root{
+        --circle-radius: 25px;
+        --box-edge:300px;
+    }
+    *{
+        margin: 0;
+    }
+        #circle{
+            
+            width: calc(var(--circle-radius)*2);
+            height: calc(var(--circle-radius)*2);
+            border: 1px solid black;
+            border-radius: 50%;
+            position: absolute;
+            /* margin-top: calc(var(--circle-radius)*-1);
+            margin-left: calc(var(--circle-radius)*-1); */
+            transform: translate(
+                calc(var(--circle-radius)*-1),
+                calc(var(--circle-radius)*-1)
+            );
+        }
+        #box{
+            width: var(--box-edge);
+            height: var(--box-edge);
+            border:1px solid black;
+            position: absolute;
+        }
+</style>
+
+<body>
+    <div id="box">
+        <div id="circle"></div>
+    </div>
+    <script src="./dragdrop.js"></script>
+</body>
+</html>

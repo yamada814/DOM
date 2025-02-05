@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        :root{
+            --box-edge:300px;
+        }
+        #box{
+            width:var(--box-edge);
+            height: var(--box-edge);
+            border:1px solid black;
+            /* cursor: url(soccer_ball.png) 15 15,auto; */
+        }
+        #boxDrag{
+            width:var(--box-edge);
+            height: var(--box-edge);
+            border:1px solid black;
+            cursor: url(soccer_ball.png) 15 15,auto;
+            /* cursor: pointer; */
+        }
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <script>
+        const box = document.getElementById("box");
+        box.addEventListener("mousedown",(e)=>{
+            e.target.classList.add("boxDrag");
+        })
+    </script>
+</body>
+</html>
