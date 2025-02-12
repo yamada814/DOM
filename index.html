@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>どこつぶ</title>
+<style>
+    .needAlert{
+        background-color: rgb(228, 174, 174);
+        opacity: 0.8;
+        content: "ここの入力は必須です";
+    }
+    input:has(.needAlert)::after{
+        content: "必須項目です";
+        color: crimson;
+    }
+    /* .needAlertMsg{
+        color: crimson;
+        font-size: 12px;
+    } */
+</style>
+</head>
+<body>
+<h1>どこつぶへようこそ</h1>
+<form action="Login" method="post">
+    <label>ユーザー名：<input type="text" name="name" class="need"></label><br>
+    <label>パスワード：<input type="password" name="pass" class="need"></label><br>
+    <button type="submit">ログイン</button>
+</form>
+<jsp:include page="/WEB-INF/jsp/docotsubuFooter.jsp"/>
+<script src="./index.js"></script>
+</body>
+</html>

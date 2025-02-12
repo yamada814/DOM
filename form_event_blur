@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ログインフォーム</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .login-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 5px;
+        }
+        .error {
+            color: red;
+            font-size: 0.8em;
+            display: none;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #28a745;
+            border: none;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+    <h2>ログイン</h2>
+    <form id="loginForm">
+        <div class="form-group">
+            <label for="username">ユーザー名</label>
+            <input type="text" id="username" name="username">
+            <span class="error" id="usernameError">ユーザー名を入力してください</span>
+        </div>
+        
+        <div class="form-group">
+            <label for="password">パスワード</label>
+            <input type="password" id="password" name="password">
+            <span class="error" id="passwordError">パスワードを入力してください</span>
+        </div>
+
+        <button type="submit" id="loginButton" disabled>ログイン</button>
+    </form>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const username = document.getElementById("username");
+        const password = document.getElementById("password");
+        const loginButton = document.getElementById("loginButton");
+
+        function validateField(input, errorId) {
+            const errorElement = document.getElementById(errorId);
+            if (input.value.trim() === "") {
+                errorElement.style.display = "block";
+            } else {
+                errorElement.style.display = "none";
+            }
+            validateForm();
+        }
+
+        function validateForm() {
+            const isUsernameValid = username.value.trim() !== "";
+            const isPasswordValid = password.value.trim() !== "";
+            loginButton.disabled = !(isUsernameValid && isPasswordValid);
+        }
+
+        username.addEventListener("blur", function () {
+            validateField(username, "usernameError");
+        });
+
+        password.addEventListener("blur", function () {
+            validateField(password, "passwordError");
+        });
+
+        document.getElementById("loginForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+            alert("ログインしました！");
+        });
+    });
+</script>
+
+</body>
+</html>
